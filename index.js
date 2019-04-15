@@ -1,12 +1,18 @@
 let path = require('path');
+let expressEdge = require('express-edge');
 let express = require('express');
 let app = new express();
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'pages/index.html'));
+app.use(expressEdge);
+app.set('views', __dirname + '/views');
+app.get('/', (req,res) => {
+  res.render('index');
 });
+// app.get('/', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, 'pages/index.html'));
+// });
 app.get('/about', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'pages/about.html'));
 });
